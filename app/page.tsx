@@ -1,4 +1,5 @@
 import ProductGallery from "./ProductGallery";
+import HeroCarousel from "./HeroCarousel";
 import products from "./products.json";
 
 const categoryCards = [
@@ -12,8 +13,8 @@ export default function Home() {
   return (
     <main>
       <header className="site-header">
-        <a className="brand" href="#top" aria-label="PH Motor Supply home">
-          <span>PH</span><small>Motor Supply</small>
+        <a className="brand" href="#top" aria-label="CANAN home">
+          <img src="/brand-canan.png" alt="CANAN" />
         </a>
         <nav aria-label="Main navigation">
           <a href="#collection">Collection</a>
@@ -23,15 +24,11 @@ export default function Home() {
       </header>
 
       <section className="hero" id="top">
-        <div className="hero-collage" aria-hidden="true">
-          <img src="/catalog-v2/product-0194.webp" alt="" />
-          <img src="/catalog-v2/product-0444.webp" alt="" />
-          <img src="/catalog-v2/product-0460.webp" alt="" />
-        </div>
+        <HeroCarousel />
         <div className="hero-overlay" />
         <div className="hero-copy">
           <p className="kicker">Guangzhou · Motorcycle Accessories</p>
-          <h1><em>PH</em> MOTOR<br />SUPPLY</h1>
+          <h1 className="hero-brand"><img src="/brand-hoperay.png" alt="Hoperay" /></h1>
           <p className="hero-intro">A focused collection of motorcycle audio, MP3 systems, phone mounts and accessories—sourced for global wholesale partners.</p>
           <div className="hero-actions">
             <a className="button light" href="#collection">View Collection</a>
@@ -80,7 +77,7 @@ export default function Home() {
           <p>Wholesale catalogue, quotations and product recommendations are available on request.</p>
           <span>WhatsApp / email details can be added here</span>
         </div>
-        <small>© 2026 PH Motor Supply · Guangzhou, China</small>
+        <small>© 2026 Hoperay · CANAN · Guangzhou, China</small>
       </footer>
     </main>
   );

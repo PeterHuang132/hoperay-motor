@@ -7,7 +7,7 @@ export async function generateMetadata(): Promise<Metadata> {
   const host = requestHeaders.get("host") || "localhost:3000";
   const protocol = requestHeaders.get("x-forwarded-proto") || (host.includes("localhost") ? "http" : "https");
   const imageUrl = `${protocol}://${host}/og.png`;
-  const title = "PH Motor Supply | Motorcycle Accessories Wholesale";
+  const title = "Hoperay · CANAN | Motorcycle Accessories Wholesale";
   const description = "Motorcycle MP3 systems, speakers, phone mounts and accessories for global wholesale partners.";
   return {
     title,
