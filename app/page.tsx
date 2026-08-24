@@ -24,9 +24,9 @@ export default function Home() {
 
       <section className="hero" id="top">
         <div className="hero-collage" aria-hidden="true">
-          <img src="/products/product-0247.webp" alt="" />
-          <img src="/products/product-0305.webp" alt="" />
-          <img src="/products/product-0584.webp" alt="" />
+          <img src="/catalog-v2/product-0194.webp" alt="" />
+          <img src="/catalog-v2/product-0444.webp" alt="" />
+          <img src="/catalog-v2/product-0460.webp" alt="" />
         </div>
         <div className="hero-overlay" />
         <div className="hero-copy">

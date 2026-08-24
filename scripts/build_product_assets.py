@@ -3,8 +3,8 @@ from PIL import Image, ImageOps
 import json
 import re
 
-SOURCE = Path("/Users/peterhuang/Desktop/客户单子/产品图片")
-TARGET = Path(__file__).resolve().parents[1] / "public" / "products"
+SOURCE = Path("/Users/peterhuang/Downloads/产品图片")
+TARGET = Path(__file__).resolve().parents[1] / "public" / "catalog-v2"
 DATA = Path(__file__).resolve().parents[1] / "app" / "products.json"
 
 PHONE = re.compile(r"手机支架|手机架|手机把座|手机镜座|支架气囊|BO5", re.I)
@@ -56,7 +56,7 @@ def main() -> None:
             "id": index,
             "name": clean_name(source.name),
             "category": category(source.name),
-            "image": f"/products/{output_name}",
+            "image": f"/catalog-v2/{output_name}",
         })
     DATA.write_text(json.dumps(products, ensure_ascii=False, indent=2), encoding="utf-8")
     counts = {key: sum(p["category"] == key for p in products) for key in ("mp3", "audio", "phone", "other")}
