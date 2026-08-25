@@ -18,7 +18,7 @@ export default function Home() {
         </a>
         <nav aria-label="Main navigation">
           <a href="#collection">Collection</a>
-          <a href="#about">About</a>
+          <a href="#contact">About</a>
           <a href="#contact">Inquiry</a>
         </nav>
       </header>
@@ -60,25 +60,23 @@ export default function Home() {
 
       <ProductGallery products={products} />
 
-      <section className="about" id="about">
+      <section className="about" id="contact">
         <p className="kicker">Independent sourcing · Connected manufacturing</p>
         <div className="about-grid">
           <h2>One reliable partner.<br /><em>Multiple product lines.</em></h2>
-          <div>
-            <p>We operate from our own motorcycle accessories showroom and work closely with selected factories. This gives buyers a wider choice, flexible sourcing and one point of contact from selection to shipment.</p>
-            <ul><li>Mixed-product sourcing</li><li>OEM colour and packaging</li><li>Quality inspection support</li><li>Export and shipment coordination</li></ul>
+          <div className="contact-panel">
+            <p>Contact us for wholesale catalogues, quotations and product recommendations.</p>
+            <ul className="contact-list" aria-label="Contact information">
+              <li><img src="/social/whatsapp.svg" alt="" /><span>WhatsApp:</span><strong>—</strong></li>
+              <li><img src="/social/facebook.svg" alt="" /><span>Facebook</span><strong>—</strong></li>
+              <li><img src="/social/tiktok.svg" alt="" /><span>TikTok</span><strong>—</strong></li>
+              <li><img src="/social/wechat.svg" alt="" /><span>WeChat:</span><strong>—</strong></li>
+              <li><img src="/social/instagram.svg" alt="" /><span>Instagram:</span><strong>—</strong></li>
+            </ul>
           </div>
         </div>
+        <small className="site-credit">© 2026 Hoperay · CANAN · Guangzhou, China</small>
       </section>
-
-      <footer id="contact">
-        <div><p className="kicker">Start a conversation</p><h2>Tell us what<br />your market needs.</h2></div>
-        <div className="contact-card">
-          <p>Wholesale catalogue, quotations and product recommendations are available on request.</p>
-          <span>WhatsApp / email details can be added here</span>
-        </div>
-        <small>© 2026 Hoperay · CANAN · Guangzhou, China</small>
-      </footer>
     </main>
   );
 }
