@@ -5,7 +5,7 @@ import products from "./products.json";
 const categoryCards = [
   { id: "mp3", index: "01", title: "Motorcycle MP3", zh: "摩托车 MP3", description: "Bluetooth players, amplifiers and complete audio systems." },
   { id: "audio", index: "02", title: "Speakers & Horns", zh: "音响与喇叭", description: "Speakers, horns, sirens and PA solutions for every market." },
-  { id: "phone", index: "03", title: "Phone Mounts", zh: "手机支架", description: "Handlebar and mirror mounts designed for everyday riding." },
+  { id: "phone", index: "03", title: "Phone Holder", zh: "手机支架", description: "Handlebar and mirror holders designed for everyday riding." },
   { id: "other", index: "04", title: "Accessories", zh: "其他配件", description: "Security, lighting, charging and practical motorcycle accessories." },
 ];
 
@@ -29,7 +29,7 @@ export default function Home() {
         <div className="hero-copy">
           <p className="kicker">Guangzhou · Motorcycle Accessories</p>
           <h1 className="hero-brand"><img src="/brand-hoperay.png" alt="Hoperay" /></h1>
-          <p className="hero-intro">A focused collection of motorcycle audio, MP3 systems, phone mounts and accessories—sourced for global wholesale partners.</p>
+          <p className="hero-intro">A focused collection of motorcycle audio, MP3 systems, phone holders and accessories—sourced for global wholesale partners.</p>
           <div className="hero-actions">
             <a className="button light" href="#collection">View Collection</a>
             <a className="button outline" href="#contact">Wholesale Inquiry</a>

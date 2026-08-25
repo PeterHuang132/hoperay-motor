@@ -8,7 +8,7 @@ const labels: Record<string, string> = {
   all: "All Products",
   mp3: "Motorcycle MP3",
   audio: "Speakers & Horns",
-  phone: "Phone Mounts",
+  phone: "Phone Holder",
   other: "Other Accessories",
 };
 
