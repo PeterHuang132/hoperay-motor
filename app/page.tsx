@@ -67,11 +67,10 @@ export default function Home() {
           <div className="contact-panel">
             <p>Contact us for wholesale catalogues, quotations and product recommendations.</p>
             <ul className="contact-list" aria-label="Contact information">
-              <li><img src="/social/whatsapp.svg" alt="" /><span>WhatsApp:</span><strong>—</strong></li>
-              <li><img src="/social/facebook.svg" alt="" /><span>Facebook</span><strong>—</strong></li>
-              <li><img src="/social/tiktok.svg" alt="" /><span>TikTok</span><strong>—</strong></li>
-              <li><img src="/social/wechat.svg" alt="" /><span>WeChat:</span><strong>—</strong></li>
-              <li><img src="/social/instagram.svg" alt="" /><span>Instagram:</span><strong>—</strong></li>
+              <li><img src="/social/whatsapp.svg" alt="" /><span>WhatsApp:</span><a href="https://wa.me/8615919655867" target="_blank" rel="noreferrer">15919655867</a></li>
+              <li><img src="/social/tiktok.svg" alt="" /><span>TikTok:</span><a href="https://www.tiktok.com/@huang.peter2" target="_blank" rel="noreferrer">@huang.peter2</a></li>
+              <li><img src="/social/wechat.svg" alt="" /><span>WeChat:</span><strong>hoperaymotor123</strong></li>
+              <li><img src="/social/gmail.svg" alt="" /><span>Gmail:</span><a href="mailto:huangbide123@gmail.com">huangbide123@gmail.com</a></li>
             </ul>
           </div>
         </div>
