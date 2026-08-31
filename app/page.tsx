@@ -28,7 +28,7 @@ export default function Home() {
         <div className="hero-overlay" />
         <div className="hero-copy">
           <p className="kicker">Guangzhou · Motorcycle Accessories</p>
-          <h1 className="hero-brand"><img src="/brand-hoperay.png" alt="Hoperay" /></h1>
+          <h1 className="hero-brand"><img src="/brand-hoperay-preview.png" alt="Hoperay" /></h1>
           <p className="hero-intro">A focused collection of motorcycle audio, MP3 systems, phone holders and accessories—sourced for global wholesale partners.</p>
           <div className="hero-actions">
             <a className="button light" href="#collection">View Collection</a>
