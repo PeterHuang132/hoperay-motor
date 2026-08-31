@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useMemo, useState } from "react";
+import ProductImageViewer from "./ProductImageViewer";
 
 type Product = { id: number; name: string; category: string; image: string };
 
@@ -17,6 +18,7 @@ export default function ProductGallery({ products }: { products: Product[] }) {
   const [filter, setFilter] = useState("all");
   const [query, setQuery] = useState("");
   const [visible, setVisible] = useState(24);
+  const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
 
   useEffect(() => {
     const handleCategory = (event: Event) => {
@@ -49,13 +51,14 @@ export default function ProductGallery({ products }: { products: Product[] }) {
       <div className="product-grid">
         {filtered.slice(0, visible).map((product) => (
           <article className="product-card" key={product.id}>
-            <div className="product-image"><img src={product.image} alt={product.name} loading="lazy" /></div>
-            <div className="product-meta"><small>{labels[product.category]}</small></div>
+            <button type="button" className="product-image" aria-label={`View product ${String(product.id).padStart(3, "0")} image`} onClick={() => setSelectedProduct(product)}><img src={product.image} alt={product.name} loading="lazy" /></button>
+            <div className="product-meta"><small>{labels[product.category]}</small><span className="product-number" aria-label={`Product number ${String(product.id).padStart(3, "0")}`}>{String(product.id).padStart(3, "0")}</span></div>
           </article>
         ))}
       </div>
       {visible < filtered.length && <button className="load-more" onClick={() => setVisible((count) => count + 24)}>Load more <span>({filtered.length - visible} remaining)</span></button>}
       {!filtered.length && <p className="empty">No matching products. Try another keyword or category.</p>}
+      {selectedProduct && <ProductImageViewer image={selectedProduct.image} number={String(selectedProduct.id).padStart(3, "0")} onClose={() => setSelectedProduct(null)} />}
     </section>
   );
 }
