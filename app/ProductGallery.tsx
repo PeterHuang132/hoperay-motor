@@ -5,10 +5,11 @@ import { useEffect, useMemo, useState } from "react";
 type Product = { id: number; name: string; category: string; image: string };
 
 const labels: Record<string, string> = {
-  all: "All Products",
-  mp3: "Motorcycle MP3",
-  audio: "Speakers & Horns",
+  all: "All Product",
+  mp3: "MP3/Speaker",
+  horn: "Horn",
   phone: "Phone Holder",
+  alarm: "Alarm",
   other: "Other Accessories",
 };
 
@@ -49,7 +50,7 @@ export default function ProductGallery({ products }: { products: Product[] }) {
         {filtered.slice(0, visible).map((product) => (
           <article className="product-card" key={product.id}>
             <div className="product-image"><img src={product.image} alt={product.name} loading="lazy" /></div>
-            <div className="product-meta"><div><small>{labels[product.category]}</small><h3>{product.name}</h3></div><span>#{String(product.id).padStart(4, "0")}</span></div>
+            <div className="product-meta"><small>{labels[product.category]}</small></div>
           </article>
         ))}
       </div>

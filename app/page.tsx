@@ -2,11 +2,14 @@ import ProductGallery from "./ProductGallery";
 import HeroCarousel from "./HeroCarousel";
 import products from "./products.json";
 
+const shopAddress = "广东省广州市增槎路新白云摩配B356";
+
 const categoryCards = [
-  { id: "mp3", index: "01", title: "Motorcycle MP3", zh: "摩托车 MP3", description: "Bluetooth players, amplifiers and complete audio systems." },
-  { id: "audio", index: "02", title: "Speakers & Horns", zh: "音响与喇叭", description: "Speakers, horns, sirens and PA solutions for every market." },
+  { id: "mp3", index: "01", title: "MP3/Speaker", zh: "MP3 与音响", description: "Bluetooth players, amplifiers, speakers and complete audio systems." },
+  { id: "horn", index: "02", title: "Horn", zh: "喇叭", description: "Motorcycle horns for every market." },
   { id: "phone", index: "03", title: "Phone Holder", zh: "手机支架", description: "Handlebar and mirror holders designed for everyday riding." },
-  { id: "other", index: "04", title: "Accessories", zh: "其他配件", description: "Security, lighting, charging and practical motorcycle accessories." },
+  { id: "alarm", index: "04", title: "Alarm", zh: "报警器", description: "Motorcycle alarms and security accessories." },
+  { id: "other", index: "05", title: "Other Accessories", zh: "其他配件", description: "Lighting, charging and practical motorcycle accessories." },
 ];
 
 export default function Home() {
@@ -34,6 +37,7 @@ export default function Home() {
             <a className="button light" href="#collection">View Collection</a>
             <a className="button outline" href="#contact">Wholesale Inquiry</a>
           </div>
+          <p className="hero-intro hero-address">Address：{shopAddress}</p>
         </div>
         <div className="hero-facts">
           <div><span>Products</span><strong>{products.length}+</strong></div>
@@ -71,6 +75,7 @@ export default function Home() {
               <li><img src="/social/tiktok.svg" alt="" /><span>TikTok:</span><a href="https://www.tiktok.com/@huang.peter2" target="_blank" rel="noreferrer">@huang.peter2</a></li>
               <li><img src="/social/wechat.svg" alt="" /><span>WeChat:</span><strong>hoperaymotor123</strong></li>
               <li><img src="/social/gmail.svg" alt="" /><span>Gmail:</span><a href="mailto:huangbide123@gmail.com">huangbide123@gmail.com</a></li>
+              <li className="contact-address"><img src="/social/location.svg" alt="" /><span>Address:</span><strong>{shopAddress}</strong></li>
             </ul>
           </div>
         </div>

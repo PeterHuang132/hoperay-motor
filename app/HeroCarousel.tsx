@@ -1,15 +1,11 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import products from "./products.json";
 
-const slides = [
-  "/catalog-v2/product-0194.webp",
-  "/catalog-v2/product-0444.webp",
-  "/catalog-v2/product-0460.webp",
-  "/catalog-v2/product-0365.webp",
-  "/catalog-v2/product-0098.webp",
-  "/catalog-v2/product-0528.webp",
-];
+const slides = ["mp3", "horn", "phone", "alarm", "other"]
+  .map((category) => products.find((product) => product.category === category)?.image)
+  .filter((image): image is string => Boolean(image));
 
 export default function HeroCarousel() {
   const [active, setActive] = useState(0);

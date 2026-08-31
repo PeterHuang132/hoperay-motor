@@ -26,6 +26,7 @@ h1 em,h2 em { font-weight:400; color:var(--accent); }
 .hero-brand img { display:block; width:100%; height:auto; object-fit:contain; object-position:left center; filter:drop-shadow(0 12px 30px rgba(0,0,0,.45)); }
 .hero-intro { max-width:660px; margin:0; font-size:clamp(17px,1.7vw,23px); line-height:1.55; }
 .hero-actions { display:flex; flex-wrap:wrap; gap:12px; margin-top:38px; }
+.hero-address { margin-top:24px; color:#fff; }
 .button { min-width:180px; padding:17px 24px; border:1px solid rgba(255,255,255,.55); text-align:center; font-size:12px; text-transform:uppercase; letter-spacing:1px; }
 .button.light { color:#111; background:#fff; border-color:#fff; } .button:hover { background:var(--accent); color:#111; border-color:var(--accent); }
 .hero-facts { position:absolute; z-index:2; right:clamp(22px,5vw,74px); bottom:42px; display:grid; grid-template-columns:repeat(3,auto); border-top:1px solid rgba(255,255,255,.35); }
@@ -37,7 +38,7 @@ h1 em,h2 em { font-weight:400; color:var(--accent); }
 .section-heading h2,.collection h2,.about h2 { margin:0; font:400 clamp(44px,6vw,86px)/.95 Georgia,serif; letter-spacing:-3px; }
 .section-heading h2 em,.about h2 em { color:#77746b; }
 .section-heading > p { margin:0; color:#575650; font-size:15px; line-height:1.75; }
-.category-grid { display:grid; grid-template-columns:repeat(4,1fr); border-top:1px solid var(--line); border-left:1px solid var(--line); }
+.category-grid { display:grid; grid-template-columns:repeat(5,minmax(0,1fr)); border-top:1px solid var(--line); border-left:1px solid var(--line); }
 .category-card { min-height:330px; padding:22px; display:flex; flex-direction:column; justify-content:space-between; border-right:1px solid var(--line); border-bottom:1px solid var(--line); transition:.25s; }
 .category-card:hover { background:var(--ink); color:white; transform:translateY(-5px); }
 .category-card > span { color:#77746b; font:13px Georgia,serif; }
@@ -69,6 +70,9 @@ h1 em,h2 em { font-weight:400; color:var(--accent); }
 .about-grid { display:grid; grid-template-columns:1.15fr .85fr; gap:10vw; align-items:start; }
 .about-grid p { color:#b8b8b1; font-size:16px; line-height:1.8; }
 .contact-panel > p { margin-bottom:30px; }
+.contact-panel { margin-top:-24px; }
+.contact-address { padding-block:14px; }
+.contact-address strong { line-height:1.8; }
 .contact-list { display:grid; grid-template-columns:1fr; gap:0; padding:0; margin:0; list-style:none; border-top:1px solid rgba(255,255,255,.2); }
 .contact-list li { display:grid; grid-template-columns:34px 120px 1fr; align-items:center; gap:14px; min-height:62px; border-bottom:1px solid rgba(255,255,255,.2); }
 .contact-list img { width:22px; height:22px; object-fit:contain; }
@@ -80,3 +84,4 @@ h1 em,h2 em { font-weight:400; color:var(--accent); }
 @media (max-width:900px) { .category-grid,.product-grid { grid-template-columns:repeat(2,1fr); }.section-heading,.about-grid { grid-template-columns:1fr; }.hero-facts { left:22px; right:auto; }.section-heading > p { max-width:560px; }.category-card { min-height:260px; }.contact-panel { margin-top:24px; }.about { padding-bottom:100px; } }
 @media (max-width:600px) { .site-header { padding:12px 20px; }.brand { width:90px; height:58px; }nav { gap:13px; font-size:11px; }.hero { min-height:100svh; padding-left:22px; padding-right:22px; }.hero-copy { padding-bottom:120px; }.hero-brand { width:min(88vw,620px); }.hero-carousel img { object-position:center; }.hero-facts { grid-template-columns:repeat(3,1fr); width:calc(100% - 44px); }.hero-facts div { min-width:0; padding-right:8px; }.hero-facts strong { font-size:10px; }.category-section,.collection,.about { padding-left:20px; padding-right:20px; }.section-heading,.collection-top { display:grid; }.category-grid { grid-template-columns:1fr; }.category-card { min-height:220px; }.product-grid { grid-template-columns:repeat(2,minmax(0,1fr)); gap:22px 8px; }.product-meta h3 { font-size:14px; }.filters { overflow-x:auto; flex-wrap:nowrap; }.filters button { flex:none; }.contact-list li { grid-template-columns:30px 108px 1fr; } }
 @media (prefers-reduced-motion:reduce) { html { scroll-behavior:auto; } * { transition:none!important; } }
+@media (max-width:600px) { .contact-address strong { grid-column:2 / -1; } }
