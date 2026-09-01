@@ -16,8 +16,8 @@ export default function Home() {
   return (
     <main>
       <header className="site-header">
-        <a className="brand" href="#top" aria-label="CANAN home">
-          <img src="/brand-canan.png" alt="CANAN" />
+        <a className="brand" href="#top" aria-label="JIANAN home">
+          <img src="/brand-jianan-transparent.png" alt="JIANAN" />
         </a>
         <nav aria-label="Main navigation">
           <a href="#collection">Collection</a>
@@ -49,9 +49,9 @@ export default function Home() {
       <section className="category-section" aria-labelledby="categories-title">
         <div className="section-heading">
           <div><p className="kicker dark">Product families</p><h2 id="categories-title">Built for the ride.<br /><em>Ready for your market.</em></h2></div>
-          <div className="category-brands" aria-label="Hoperay and CANAN brands">
+          <div className="category-brands" aria-label="Hoperay and JIANAN brands">
             <img className="category-brand-hoperay" src="/brand-hoperay-transparent.png" alt="Hoperay" />
-            <img className="category-brand-canan" src="/brand-canan.png" alt="CANAN" />
+            <img className="category-brand-canan" src="/brand-jianan-transparent.png" alt="JIANAN" />
           </div>
         </div>
         <div className="category-grid">

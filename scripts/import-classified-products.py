@@ -8,9 +8,10 @@ ROOT = Path(__file__).resolve().parents[1]
 SOURCE = Path('/Users/peterhuang/Desktop/全新')
 TARGET = ROOT / 'public/catalog-v3'
 REUSABLE_EXPORT = ROOT / 'outputs/catalog-v3-pre-prune-20260901'
+ADDITIONAL_MP3 = ROOT / 'assets/product-additions/mp3'
 CATEGORIES = [('MP3:Speaker', 'mp3'), ('Horn', 'horn'), ('Phone Holder', 'phone'), ('Alarm', 'alarm'), ('Other Accessories', 'other')]
 EXCLUDED_SOURCE_IDS = {
-    'mp3': {2, 5, 26, 28, 30, 34, 35, 36, 42, 44, 47, 52, 59, 60, 61, 62, 64, 70, 73, 81, 83, 86, 87, 88, 91, 98, 99, 100, 102, 104, 105, 119, 130, 139, 146, 148, 151, 154, 155, 156, 158, 159, 160, 199, 200, 205, 209, 210, 214, 215, 221, 223, 226},
+    'mp3': {2, 5, 9, 15, 16, 22, 26, 28, 30, 31, 34, 35, 36, 42, 44, 47, 52, 59, 60, 61, 62, 64, 70, 73, 77, 81, 83, 86, 87, 88, 91, 95, 98, 99, 100, 102, 103, 104, 105, 119, 130, 138, 139, 140, 146, 148, 150, 151, 154, 155, 156, 158, 159, 160, 176, 195, 199, 200, 201, 204, 205, 209, 210, 214, 215, 221, 223, 226},
     'horn': {246, 248, 253, 254, 266, 276, 280, 296, 299},
     'phone': {351, 352, 366, 379},
     'alarm': set(),
@@ -19,7 +20,9 @@ EXCLUDED_SOURCE_IDS = {
 # Approved against the 361-item preview after exclusions. These are the
 # corresponding stable source IDs for preview IDs 008, 012, 018, 019, 108,
 # 107, 113, 114, 116, 109, 110, 111, 112, 046 and 047.
-PRIORITY_SOURCE_IDS = [114, 111, 6, 7, 142, 141, 149, 150, 153, 143, 144, 145, 147, 48, 49]
+PRIORITY_SOURCE_IDS = [114, 111, 6, 7, 142, 141, 149, 153, 143, 144, 145, 147, 48, 49]
+CATEGORY_OVERRIDES = {153: 'horn', 177: 'phone'}
+MP3_FEATURED_SOURCE_IDS = [120, 118, 10, 23, 24, 121, 122, 123, 164, 165]
 TARGET.mkdir(parents=True, exist_ok=True)
 source_products = []
 counts = {}
@@ -39,11 +42,20 @@ excluded = set().union(*EXCLUDED_SOURCE_IDS.values())
 priority_rank = {source_id: rank for rank, source_id in enumerate(PRIORITY_SOURCE_IDS)}
 selected = [product for product in source_products if product['source_id'] not in excluded]
 selected.sort(key=lambda product: (0, priority_rank[product['source_id']]) if product['source_id'] in priority_rank else (1, product['source_id']))
+for product in selected:
+    product['category'] = CATEGORY_OVERRIDES.get(product['source_id'], product['category'])
+additional_mp3 = sorted(ADDITIONAL_MP3.glob('addition-*.webp'))
+assert len(additional_mp3) == 7
+selected.extend({'source_id': None, 'name': source.stem, 'category': 'mp3', 'source': source} for source in additional_mp3)
 
 products = []
+mp3_featured_rank = {source_id: rank for rank, source_id in enumerate(MP3_FEATURED_SOURCE_IDS)}
 for product in selected:
-        index = len(products) + 1
-        filename = f'product-{index:04d}.webp'
+    index = len(products) + 1
+    filename = f'product-{index:04d}.webp'
+    if product['source_id'] is None:
+        shutil.copyfile(product['source'], TARGET / filename)
+    else:
         reusable = REUSABLE_EXPORT / f"product-{product['source_id']:04d}.webp"
         if reusable.exists():
             shutil.copyfile(reusable, TARGET / filename)
@@ -54,9 +66,12 @@ for product in selected:
                 canvas = Image.new('RGB', (1000, 1000), '#f3f1ec')
                 canvas.paste(image, ((1000-image.width)//2, (1000-image.height)//2))
                 canvas.save(TARGET / filename, 'WEBP', quality=82, method=4)
-        products.append({'id': index, 'name': product['name'], 'category': product['category'], 'image': f'/catalog-v3/{filename}'})
+    record = {'id': index, 'name': product['name'], 'category': product['category'], 'image': f'/catalog-v3/{filename}'}
+    if product['source_id'] in mp3_featured_rank:
+        record['mp3Priority'] = mp3_featured_rank[product['source_id']]
+    products.append(record)
 assert products and all(counts.values())
-assert len(products) == 361
+assert len(products) == 353
 (ROOT / 'app/products.json').write_text(json.dumps(products, ensure_ascii=False, indent=2) + '\n', encoding='utf-8')
 final_counts = {category: sum(product['category'] == category for product in products) for _, category in CATEGORIES}
 print(json.dumps({'total': len(products), 'source_categories': counts, 'final_categories': final_counts}, ensure_ascii=False))
