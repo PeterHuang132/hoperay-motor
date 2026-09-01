@@ -3,7 +3,7 @@
 import { useEffect, useMemo, useState } from "react";
 import ProductImageViewer from "./ProductImageViewer";
 
-type Product = { id: number; name: string; category: string; image: string; mp3Priority?: number };
+type Product = { id: number; name: string; category: string; image: string };
 
 const labels: Record<string, string> = {
   all: "All Product",
@@ -33,16 +33,10 @@ export default function ProductGallery({ products }: { products: Product[] }) {
     return () => document.removeEventListener("click", handleCategory);
   }, []);
 
-  const filtered = useMemo(() => {
-    const matches = products.filter((product) => {
+  const filtered = useMemo(() => products.filter((product) => {
       const inCategory = filter === "all" || product.category === filter;
       return inCategory && product.name.toLowerCase().includes(query.toLowerCase().trim());
-    });
-    if (filter === "mp3") {
-      return matches.sort((a, b) => (a.mp3Priority ?? Number.MAX_SAFE_INTEGER) - (b.mp3Priority ?? Number.MAX_SAFE_INTEGER));
-    }
-    return matches;
-  }, [filter, products, query]);
+    }), [filter, products, query]);
 
   return (
     <section className="collection" id="collection">

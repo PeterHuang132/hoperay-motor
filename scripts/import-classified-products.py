@@ -17,12 +17,10 @@ EXCLUDED_SOURCE_IDS = {
     'alarm': set(),
     'other': {386, 421, 423, 424},
 }
-# Approved against the 361-item preview after exclusions. These are the
-# corresponding stable source IDs for preview IDs 008, 012, 018, 019, 108,
-# 107, 113, 114, 116, 109, 110, 111, 112, 046 and 047.
-PRIORITY_SOURCE_IDS = [114, 111, 6, 7, 142, 141, 149, 153, 143, 144, 145, 147, 48, 49]
+# The first ten source IDs match the owner's attached screenshots, in order.
+# The remaining IDs preserve the previously approved priority order.
+PRIORITY_SOURCE_IDS = [120, 118, 10, 24, 23, 121, 122, 123, 164, 165, 114, 111, 6, 7, 142, 141, 149, 153, 143, 144, 145, 147, 48, 49]
 CATEGORY_OVERRIDES = {153: 'horn', 177: 'phone'}
-MP3_FEATURED_SOURCE_IDS = [120, 118, 10, 23, 24, 121, 122, 123, 164, 165]
 TARGET.mkdir(parents=True, exist_ok=True)
 source_products = []
 counts = {}
@@ -49,7 +47,6 @@ assert len(additional_mp3) == 7
 selected.extend({'source_id': None, 'name': source.stem, 'category': 'mp3', 'source': source} for source in additional_mp3)
 
 products = []
-mp3_featured_rank = {source_id: rank for rank, source_id in enumerate(MP3_FEATURED_SOURCE_IDS)}
 for product in selected:
     index = len(products) + 1
     filename = f'product-{index:04d}.webp'
@@ -66,10 +63,7 @@ for product in selected:
                 canvas = Image.new('RGB', (1000, 1000), '#f3f1ec')
                 canvas.paste(image, ((1000-image.width)//2, (1000-image.height)//2))
                 canvas.save(TARGET / filename, 'WEBP', quality=82, method=4)
-    record = {'id': index, 'name': product['name'], 'category': product['category'], 'image': f'/catalog-v3/{filename}'}
-    if product['source_id'] in mp3_featured_rank:
-        record['mp3Priority'] = mp3_featured_rank[product['source_id']]
-    products.append(record)
+    products.append({'id': index, 'name': product['name'], 'category': product['category'], 'image': f'/catalog-v3/{filename}'})
 assert products and all(counts.values())
 assert len(products) == 353
 (ROOT / 'app/products.json').write_text(json.dumps(products, ensure_ascii=False, indent=2) + '\n', encoding='utf-8')
