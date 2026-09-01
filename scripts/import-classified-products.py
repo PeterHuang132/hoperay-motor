@@ -19,7 +19,7 @@ EXCLUDED_SOURCE_IDS = {
 }
 # The first ten source IDs match the owner's attached screenshots, in order.
 # The remaining IDs preserve the previously approved priority order.
-PRIORITY_SOURCE_IDS = [120, 118, 10, 24, 23, 121, 122, 123, 164, 165, 114, 111, 6, 7, 142, 141, 149, 153, 143, 144, 145, 147, 48, 49]
+PRIORITY_SOURCE_IDS = [108, 107, 8, 19, 18, 109, 110, 112, 134, 135, 114, 111, 6, 7, 142, 141, 149, 153, 143, 144, 145, 147, 48, 49]
 CATEGORY_OVERRIDES = {153: 'horn', 177: 'phone'}
 TARGET.mkdir(parents=True, exist_ok=True)
 source_products = []
