@@ -56,7 +56,10 @@ export default function ProductGallery({ products }: { products: Product[] }) {
           </article>
         ))}
       </div>
-      {visible < filtered.length && <button className="load-more" onClick={() => setVisible((count) => count + 24)}>Load more <span>({filtered.length - visible} remaining)</span></button>}
+      {(visible < filtered.length || visible > 24) && <div className="collection-controls">
+        {visible < filtered.length && <button className="load-more" onClick={() => setVisible((count) => count + 24)}>Load more <span>({filtered.length - visible} remaining)</span></button>}
+        {visible > 24 && <button className="load-more" onClick={() => setVisible((count) => Math.max(24, count - 24))}>Load less</button>}
+      </div>}
       {!filtered.length && <p className="empty">No matching products. Try another keyword or category.</p>}
       {selectedProduct && <ProductImageViewer image={selectedProduct.image} number={String(selectedProduct.id).padStart(3, "0")} onClose={() => setSelectedProduct(null)} />}
     </section>

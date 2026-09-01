@@ -49,7 +49,10 @@ export default function Home() {
       <section className="category-section" aria-labelledby="categories-title">
         <div className="section-heading">
           <div><p className="kicker dark">Product families</p><h2 id="categories-title">Built for the ride.<br /><em>Ready for your market.</em></h2></div>
-          <p>From individual components to complete sets, we help importers and distributors source practical, market-ready motorcycle accessories.</p>
+          <div className="category-brands" aria-label="Hoperay and CANAN brands">
+            <img className="category-brand-hoperay" src="/brand-hoperay-transparent.png" alt="Hoperay" />
+            <img className="category-brand-canan" src="/brand-canan.png" alt="CANAN" />
+          </div>
         </div>
         <div className="category-grid">
           {categoryCards.map((category) => (
