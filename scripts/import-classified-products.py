@@ -10,6 +10,7 @@ TARGET = ROOT / 'public/catalog-v3'
 REUSABLE_EXPORT = ROOT / 'outputs/catalog-v3-pre-prune-20260901'
 ADDITIONAL_MP3 = ROOT / 'assets/product-additions/mp3'
 INSERTED_MP3 = ADDITIONAL_MP3 / 'insert-after-014.webp'
+INSERTED_MP3_AFTER_005 = ADDITIONAL_MP3 / 'insert-after-005.webp'
 ADDITIONAL_PHONE = ROOT / 'assets/product-additions/phone'
 CATEGORIES = [('MP3:Speaker', 'mp3'), ('Horn', 'horn'), ('Phone Holder', 'phone'), ('Alarm', 'alarm'), ('Other Accessories', 'other')]
 EXCLUDED_SOURCE_IDS = {
@@ -46,6 +47,8 @@ for product in selected:
     product['category'] = CATEGORY_OVERRIDES.get(product['source_id'], product['category'])
 assert INSERTED_MP3.exists()
 selected.insert(14, {'source_id': None, 'name': INSERTED_MP3.stem, 'category': 'mp3', 'source': INSERTED_MP3})
+assert INSERTED_MP3_AFTER_005.exists()
+selected.insert(5, {'source_id': None, 'name': INSERTED_MP3_AFTER_005.stem, 'category': 'mp3', 'source': INSERTED_MP3_AFTER_005})
 additional_mp3 = sorted(ADDITIONAL_MP3.glob('addition-*.webp'))
 assert len(additional_mp3) == 7
 selected.extend({'source_id': None, 'name': source.stem, 'category': 'mp3', 'source': source} for source in additional_mp3)
@@ -76,7 +79,7 @@ for product in selected:
                 canvas.save(TARGET / filename, 'WEBP', quality=82, method=4)
     products.append({'id': index, 'name': product['name'], 'category': product['category'], 'image': f'/catalog-v3/{filename}'})
 assert products and all(counts.values())
-assert len(products) == 382
+assert len(products) == 383
 (ROOT / 'app/products.json').write_text(json.dumps(products, ensure_ascii=False, indent=2) + '\n', encoding='utf-8')
 final_counts = {category: sum(product['category'] == category for product in products) for _, category in CATEGORIES}
 print(json.dumps({'total': len(products), 'source_categories': counts, 'final_categories': final_counts}, ensure_ascii=False))
