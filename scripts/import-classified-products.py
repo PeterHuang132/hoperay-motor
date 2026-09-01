@@ -9,6 +9,7 @@ SOURCE = Path('/Users/peterhuang/Desktop/全新')
 TARGET = ROOT / 'public/catalog-v3'
 REUSABLE_EXPORT = ROOT / 'outputs/catalog-v3-pre-prune-20260901'
 ADDITIONAL_MP3 = ROOT / 'assets/product-additions/mp3'
+INSERTED_MP3 = ADDITIONAL_MP3 / 'insert-after-014.webp'
 CATEGORIES = [('MP3:Speaker', 'mp3'), ('Horn', 'horn'), ('Phone Holder', 'phone'), ('Alarm', 'alarm'), ('Other Accessories', 'other')]
 EXCLUDED_SOURCE_IDS = {
     'mp3': {2, 5, 9, 15, 16, 22, 26, 28, 30, 31, 34, 35, 36, 42, 44, 47, 52, 59, 60, 61, 62, 64, 70, 73, 77, 81, 83, 86, 87, 88, 91, 95, 98, 99, 100, 102, 103, 104, 105, 119, 130, 138, 139, 140, 146, 148, 150, 151, 154, 155, 156, 158, 159, 160, 176, 195, 199, 200, 201, 204, 205, 209, 210, 214, 215, 221, 223, 226},
@@ -42,6 +43,8 @@ selected = [product for product in source_products if product['source_id'] not i
 selected.sort(key=lambda product: (0, priority_rank[product['source_id']]) if product['source_id'] in priority_rank else (1, product['source_id']))
 for product in selected:
     product['category'] = CATEGORY_OVERRIDES.get(product['source_id'], product['category'])
+assert INSERTED_MP3.exists()
+selected.insert(14, {'source_id': None, 'name': INSERTED_MP3.stem, 'category': 'mp3', 'source': INSERTED_MP3})
 additional_mp3 = sorted(ADDITIONAL_MP3.glob('addition-*.webp'))
 assert len(additional_mp3) == 7
 selected.extend({'source_id': None, 'name': source.stem, 'category': 'mp3', 'source': source} for source in additional_mp3)
@@ -65,7 +68,7 @@ for product in selected:
                 canvas.save(TARGET / filename, 'WEBP', quality=82, method=4)
     products.append({'id': index, 'name': product['name'], 'category': product['category'], 'image': f'/catalog-v3/{filename}'})
 assert products and all(counts.values())
-assert len(products) == 353
+assert len(products) == 354
 (ROOT / 'app/products.json').write_text(json.dumps(products, ensure_ascii=False, indent=2) + '\n', encoding='utf-8')
 final_counts = {category: sum(product['category'] == category for product in products) for _, category in CATEGORIES}
 print(json.dumps({'total': len(products), 'source_categories': counts, 'final_categories': final_counts}, ensure_ascii=False))
