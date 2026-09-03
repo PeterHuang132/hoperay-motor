@@ -12,6 +12,10 @@ ADDITIONAL_MP3 = ROOT / 'assets/product-additions/mp3'
 INSERTED_MP3 = ADDITIONAL_MP3 / 'insert-after-014.webp'
 INSERTED_MP3_AFTER_005 = ADDITIONAL_MP3 / 'insert-after-005.webp'
 INSERTED_MP3_FIRST = ADDITIONAL_MP3 / 'insert-first.webp'
+INSERTED_MP3_AFTER_017 = [
+    ADDITIONAL_MP3 / 'insert-after-017-001.webp',
+    ADDITIONAL_MP3 / 'insert-after-017-002.webp',
+]
 ADDITIONAL_PHONE = ROOT / 'assets/product-additions/phone'
 CATEGORIES = [('MP3:Speaker', 'mp3'), ('Horn', 'horn'), ('Phone Holder', 'phone'), ('Alarm', 'alarm'), ('Other Accessories', 'other')]
 EXCLUDED_SOURCE_IDS = {
@@ -52,6 +56,11 @@ assert INSERTED_MP3_AFTER_005.exists()
 selected.insert(5, {'source_id': None, 'name': INSERTED_MP3_AFTER_005.stem, 'category': 'mp3', 'source': INSERTED_MP3_AFTER_005})
 assert INSERTED_MP3_FIRST.exists()
 selected.insert(0, {'source_id': None, 'name': INSERTED_MP3_FIRST.stem, 'category': 'mp3', 'source': INSERTED_MP3_FIRST})
+assert all(source.exists() for source in INSERTED_MP3_AFTER_017)
+selected[17:17] = [
+    {'source_id': None, 'name': source.stem, 'category': 'mp3', 'source': source}
+    for source in INSERTED_MP3_AFTER_017
+]
 additional_mp3 = sorted(ADDITIONAL_MP3.glob('addition-*.webp'))
 assert len(additional_mp3) == 7
 selected.extend({'source_id': None, 'name': source.stem, 'category': 'mp3', 'source': source} for source in additional_mp3)
@@ -82,7 +91,7 @@ for product in selected:
                 canvas.save(TARGET / filename, 'WEBP', quality=82, method=4)
     products.append({'id': index, 'name': product['name'], 'category': product['category'], 'image': f'/catalog-v3/{filename}'})
 assert products and all(counts.values())
-assert len(products) == 384
+assert len(products) == 386
 (ROOT / 'app/products.json').write_text(json.dumps(products, ensure_ascii=False, indent=2) + '\n', encoding='utf-8')
 final_counts = {category: sum(product['category'] == category for product in products) for _, category in CATEGORIES}
 print(json.dumps({'total': len(products), 'source_categories': counts, 'final_categories': final_counts}, ensure_ascii=False))
